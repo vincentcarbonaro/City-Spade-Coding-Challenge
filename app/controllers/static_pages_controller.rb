@@ -17,7 +17,7 @@ class StaticPagesController < ApplicationController
     @results2 = []
 
     doc.css('.info').each do |anchor|
-      @results2 << anchor.css('.address').text.strip + anchor.css('.hood').text.strip
+      @results2 << anchor.css('.address').text.strip + " " + anchor.css('.hood').text.strip
     end
 
   end
