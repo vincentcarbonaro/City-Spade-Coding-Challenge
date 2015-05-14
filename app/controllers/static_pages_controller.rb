@@ -18,6 +18,7 @@ class StaticPagesController < ApplicationController
         if location.latitude == nil
           location.address = location.address + " "
           location.save!
+          sleep(0.2)
         end
       else
         pid = listing.at_xpath('ZPID').text
