@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'gmaps4rails'
+# gem 'gmaps4rails'
+gem 'geocoder'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'

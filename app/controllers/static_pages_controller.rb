@@ -9,8 +9,6 @@ class StaticPagesController < ApplicationController
   def update
     require 'nokogiri'
     require 'open-uri'
-    require 'net/http' #needed for making requests (to google api)
-    require 'json' #needed for parsing JSON responses
 
     doc = Nokogiri::XML(open("http://www.related.com/feeds/ZillowAvailabilities.xml"))
 
@@ -19,7 +17,6 @@ class StaticPagesController < ApplicationController
 
     doc.xpath('//Listing/Location').each do |listing|
 
-      next if z > 0
 
       if location = Location.find_by_pid(listing.at_xpath('ZPID').text)
         @results << location
@@ -28,24 +25,14 @@ class StaticPagesController < ApplicationController
         pid = listing.at_xpath('ZPID').text
         address = "#{listing.at_xpath('StreetAddress').text} #{listing.at_xpath('City').text} #{listing.at_xpath('State').text} #{listing.at_xpath('Zip').text}"
 
-        google_api_url = "https://maps.googleapis.com/maps/api/geocode/json?address=#{address}&key=AIzaSyDzJuQL5GR4pzHRpsXlZZ9Z4_soBHGlXys"
-        resp = Net::HTTP.get_response(URI.parse(google_api_url))
-        data = JSON.parse(resp.body)
+        location = Location.new(pid: pid, address: address)
+
+        if z == 0
+          location.save!
+        end
 
         sleep(0.2)
-
-        location = Location.new(
-          pid: pid,
-          address: address,
-          latitude: data["results"][0]["geometry"]["location"]["lat"],
-          longitude: data["results"][0]["geometry"]["location"]["lng"]
-        )
-
-        location.save!
         @results << location
-
-        # http://quotaguard2720:700399cf9303@proxy.quotaguard.com:9292
-        # heroku config -s | grep http://quotaguard2720:700399cf9303@proxy.quotaguard.com:9292 >> .env
 
       end
 
@@ -53,19 +40,25 @@ class StaticPagesController < ApplicationController
 
     end
 
+  # http://quotaguard2720:700399cf9303@proxy.quotaguard.com:9292
+  # heroku config -s | grep http://quotaguard2720:700399cf9303@proxy.quotaguard.com:9292 >> .env
+
     ################################################################################
 
-    # url = "http://www.corcoran.com/nyc/Search/Listings?SaleType=Rent&&Count=36&Page="
-    # i = 0
+    url = "http://www.corcoran.com/nyc/Search/Listings?SaleType=Rent&&Count=36&Page="
+    i = 26
     @results2 = []
-
+    
     # while Nokogiri::HTML(open("#{url}#{i}")).css('.info').length > 0
     #
     #   doc = Nokogiri::HTML(open("#{url}#{i}"))
     #
     #   doc.css('.listing').each do |listing|
     #     location = Location.new(pid: listing.attributes['data-listingid'].text, address: listing.css('.address').text.strip + " " + listing.css('.hood').text.strip)
-    #     location.save!
+    #     if i == -1
+    #       fail
+    #       location.save!
+    #     end
     #     @results2 << location
     #   end
     #
