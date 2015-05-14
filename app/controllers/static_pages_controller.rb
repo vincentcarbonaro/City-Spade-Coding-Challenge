@@ -20,9 +20,9 @@ class StaticPagesController < ApplicationController
     doc.xpath('//Listing/Location').each do |listing|
 
       next if z > 0
-    
-    #   if location = Location.find_by_pid(listing.at_xpath('ZPID').text)
-    #     @results << location
+
+      if location = Location.find_by_pid(listing.at_xpath('ZPID').text)
+        @results << location
     #   else
     #
     #     pid = listing.at_xpath('ZPID').text
@@ -43,8 +43,8 @@ class StaticPagesController < ApplicationController
     #
     #     location.save!
     #     @results << location
-    #
-    #   end
+    
+      end
 
       z+=1
 
