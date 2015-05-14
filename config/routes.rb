@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   get '/update' => 'static_pages#update'
   get '/index' => "static_pages#index"
 
+  post '/locations', to: 'locations#index'
+
 end
