@@ -9,6 +9,8 @@ class StaticPagesController < ApplicationController
   def update
     require 'nokogiri'
     require 'open-uri'
+    require 'net/http' #needed for making requests (to google api)
+    require 'json' #needed for parsing JSON responses
 
     doc = Nokogiri::XML(open("http://www.related.com/feeds/ZillowAvailabilities.xml"))
 
@@ -78,6 +80,8 @@ class StaticPagesController < ApplicationController
   def FULLUPDATE
     require 'nokogiri'
     require 'open-uri'
+    require 'net/http' #needed for making requests (to google api)
+    require 'json' #needed for parsing JSON responses
 
     doc = Nokogiri::XML(open("http://www.related.com/feeds/ZillowAvailabilities.xml"))
 
