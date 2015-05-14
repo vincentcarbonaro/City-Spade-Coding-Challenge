@@ -4,7 +4,7 @@
 <h2>Part 1: XML Fetching</h2>
 
 <% @results.each do |result| %>
-  <%= result %> -
+  <%= "ID = " + result.id + " - " + result.address %> -
   <br>
 <% end %>
 
@@ -19,6 +19,6 @@
 <h2>Part 2: Website Data Fetching</h2>
 
 <% @results2.each do |result| %>
-  <%= result %> -
-  <br>
+<%= "ID = " + result.id + " - " + result.address %> -
+<br>
 <% end %>
