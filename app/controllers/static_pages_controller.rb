@@ -29,7 +29,7 @@ class StaticPagesController < ApplicationController
     ################################################################################
 
     url = "http://www.corcoran.com/nyc/Search/Listings?SaleType=Rent&&Count=36&Page="
-    i = 26
+    i = 0
     @results2 = []
 
     while Nokogiri::HTML(open("#{url}#{i}")).css('.info').length > 0
@@ -76,7 +76,7 @@ class StaticPagesController < ApplicationController
     ################################################################################
 
     url = "http://www.corcoran.com/nyc/Search/Listings?SaleType=Rent&&Count=36&Page="
-    i = 24
+    i = 23
     @results2 = []
 
     while Nokogiri::HTML(open("#{url}#{i}")).css('.info').length > 0
@@ -93,7 +93,7 @@ class StaticPagesController < ApplicationController
 
         @results2 << location
       end
-    #
+
       i+=1
     end
   end
