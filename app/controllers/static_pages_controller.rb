@@ -45,23 +45,23 @@ class StaticPagesController < ApplicationController
 
     ################################################################################
 
-    url = "http://www.corcoran.com/nyc/Search/Listings?SaleType=Rent&&Count=36&Page="
-    i = 26
-    @results2 = []
-
-    while Nokogiri::HTML(open("#{url}#{i}")).css('.info').length > 0
-
-      doc = Nokogiri::HTML(open("#{url}#{i}"))
-
-      doc.css('.listing').each do |listing|
-        location = Location.new(pid: listing.attributes['data-listingid'].text, address: listing.css('.address').text.strip + " " + listing.css('.hood').text.strip)
-        location.save!
-        fail
-        @results2 << location
-      end
-
-      i+=1
-    end
+    # url = "http://www.corcoran.com/nyc/Search/Listings?SaleType=Rent&&Count=36&Page="
+    # i = 26
+    # @results2 = []
+    #
+    # while Nokogiri::HTML(open("#{url}#{i}")).css('.info').length > 0
+    #
+    #   doc = Nokogiri::HTML(open("#{url}#{i}"))
+    #
+    #   doc.css('.listing').each do |listing|
+    #     location = Location.new(pid: listing.attributes['data-listingid'].text, address: listing.css('.address').text.strip + " " + listing.css('.hood').text.strip)
+    #     location.save!
+    #     fail
+    #     @results2 << location
+    #   end
+    #
+    #   i+=1
+    # end
 
     # Users of the free API:
     # 2,500 requests per 24 hour period.
