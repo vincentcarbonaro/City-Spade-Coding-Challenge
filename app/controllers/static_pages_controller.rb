@@ -30,19 +30,22 @@ class StaticPagesController < ApplicationController
 
         google_api_url = "https://maps.googleapis.com/maps/api/geocode/json?address=#{address}&key=AIzaSyDzJuQL5GR4pzHRpsXlZZ9Z4_soBHGlXys"
         resp = Net::HTTP.get_response(URI.parse(google_api_url))
-    #     data = JSON.parse(resp.body)
+        data = JSON.parse(resp.body)
 
         sleep(0.2)
 
         location = Location.new(
           pid: pid,
           address: address#,
-    #       latitude: data["results"][0]["geometry"]["location"]["lat"],
-    #       longitude: data["results"][0]["geometry"]["location"]["lng"]
+          latitude: data["results"][0]["geometry"]["location"]["lat"],
+          longitude: data["results"][0]["geometry"]["location"]["lng"]
         )
 
-    #     location.save!
+        location.save!
         @results << location
+
+        # http://quotaguard2720:700399cf9303@proxy.quotaguard.com:9292
+        # heroku config -s | grep http://quotaguard2720:700399cf9303@proxy.quotaguard.com:9292 >> .env
 
       end
 
