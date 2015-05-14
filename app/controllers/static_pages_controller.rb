@@ -27,9 +27,7 @@ class StaticPagesController < ApplicationController
 
         location = Location.new(pid: pid, address: address)
 
-        if z == 0
-          location.save!
-        end
+        location.save!
 
         sleep(0.2)
         @results << location
@@ -48,7 +46,7 @@ class StaticPagesController < ApplicationController
     url = "http://www.corcoran.com/nyc/Search/Listings?SaleType=Rent&&Count=36&Page="
     i = 26
     @results2 = []
-    
+
     # while Nokogiri::HTML(open("#{url}#{i}")).css('.info').length > 0
     #
     #   doc = Nokogiri::HTML(open("#{url}#{i}"))
