@@ -24,17 +24,17 @@ class StaticPagesController < ApplicationController
     ################################################################################
 
     url = "http://www.corcoran.com/nyc/Search/Listings?SaleType=Rent&&Count=36&Page="
-    i = 25
+    i = 26
     @results2 = []
 
     while Nokogiri::HTML(open("#{url}#{i}")).css('.info').length > 0
 
       doc = Nokogiri::HTML(open("#{url}#{i}"))
 
-      doc.css('.info').each do |anchor|
+      doc.css('.listing').each do |listing|
         instance = Listing.new
-        instance.id = Hash[anchor.xpath("//a/@*[starts-with(name(), 'data-')]").map{|e| [e.name,e.value]}]['data-listingid'] + " "
-        instance.address = anchor.css('.address').text.strip + " " + anchor.css('.hood').text.strip
+        instance.id = listing.attributes['data-listingid'].text + " "
+        instance.address = listing.css('.address').text.strip + " " + listing.css('.hood').text.strip
         @results2 << instance
       end
 
