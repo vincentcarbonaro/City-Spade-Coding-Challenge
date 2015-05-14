@@ -15,40 +15,40 @@ class StaticPagesController < ApplicationController
     doc = Nokogiri::XML(open("http://www.related.com/feeds/ZillowAvailabilities.xml"))
 
     @results = []
-    z = 0;
-
-    doc.xpath('//Listing/Location').each do |listing|
-
-      next if z > 0
-
-      if location = Location.find_by_pid(listing.at_xpath('ZPID').text)
-        @results << location
-      else
-
-        pid = listing.at_xpath('ZPID').text
-        address = "#{listing.at_xpath('StreetAddress').text} #{listing.at_xpath('City').text} #{listing.at_xpath('State').text} #{listing.at_xpath('Zip').text}"
-
-        google_api_url = "https://maps.googleapis.com/maps/api/geocode/json?address=#{address}&key=AIzaSyDzJuQL5GR4pzHRpsXlZZ9Z4_soBHGlXys"
-        resp = Net::HTTP.get_response(URI.parse(google_api_url))
-        data = JSON.parse(resp.body)
-
-        sleep(0.2)
-
-        location = Location.new(
-          pid: pid,
-          address: address,
-          latitude: data["results"][0]["geometry"]["location"]["lat"],
-          longitude: data["results"][0]["geometry"]["location"]["lng"]
-        )
-
-        location.save!
-        @results << location
-
-      end
-
-      z+=1
-
-    end
+    # z = 0;
+    #
+    # doc.xpath('//Listing/Location').each do |listing|
+    #
+    #   next if z > 0
+    #
+    #   if location = Location.find_by_pid(listing.at_xpath('ZPID').text)
+    #     @results << location
+    #   else
+    #
+    #     pid = listing.at_xpath('ZPID').text
+    #     address = "#{listing.at_xpath('StreetAddress').text} #{listing.at_xpath('City').text} #{listing.at_xpath('State').text} #{listing.at_xpath('Zip').text}"
+    #
+    #     google_api_url = "https://maps.googleapis.com/maps/api/geocode/json?address=#{address}&key=AIzaSyDzJuQL5GR4pzHRpsXlZZ9Z4_soBHGlXys"
+    #     resp = Net::HTTP.get_response(URI.parse(google_api_url))
+    #     data = JSON.parse(resp.body)
+    #
+    #     sleep(0.2)
+    #
+    #     location = Location.new(
+    #       pid: pid,
+    #       address: address,
+    #       latitude: data["results"][0]["geometry"]["location"]["lat"],
+    #       longitude: data["results"][0]["geometry"]["location"]["lng"]
+    #     )
+    #
+    #     location.save!
+    #     @results << location
+    #
+    #   end
+    #
+    #   z+=1
+    #
+    # end
 
     ################################################################################
 
