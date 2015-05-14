@@ -1,0 +1,20 @@
+<h2><u>Vincent Carbonaro's City Spade Coding Challenge</u></h2>
+
+This page will attempt to refresh the database each time<br>
+If you would like to see what's in the database already, click <a href="/index">here</a><br>
+This page refreshes the database in its entirety.  If you're at this screen you have great patience
+<br>
+
+<h2>Part 1: XML Fetching</h2>
+
+<% @results.each do |result| %>
+  <%= "ID = " + result.pid + " - " + result.address %> -
+  <br>
+<% end %>
+
+<h2>Part 2: Website Data Fetching</h2>
+
+<% @results2.each do |result| %>
+<%= "ID = " + result.pid + " - " + result.address %> -
+<br>
+<% end %>
