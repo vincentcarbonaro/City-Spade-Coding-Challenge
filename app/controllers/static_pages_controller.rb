@@ -36,7 +36,7 @@ class StaticPagesController < ApplicationController
 
         location = Location.new(
           pid: pid,
-          address: address#,
+          address: address,
           latitude: data["results"][0]["geometry"]["location"]["lat"],
           longitude: data["results"][0]["geometry"]["location"]["lng"]
         )
