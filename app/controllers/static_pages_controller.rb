@@ -15,12 +15,12 @@ class StaticPagesController < ApplicationController
     doc = Nokogiri::XML(open("http://www.related.com/feeds/ZillowAvailabilities.xml"))
 
     @results = []
-    # z = 0;
-    #
-    # doc.xpath('//Listing/Location').each do |listing|
-    #
-    #   next if z > 0
-    #
+    z = 0;
+
+    doc.xpath('//Listing/Location').each do |listing|
+
+      next if z > 0
+    
     #   if location = Location.find_by_pid(listing.at_xpath('ZPID').text)
     #     @results << location
     #   else
@@ -45,10 +45,10 @@ class StaticPagesController < ApplicationController
     #     @results << location
     #
     #   end
-    #
-    #   z+=1
-    #
-    # end
+
+      z+=1
+
+    end
 
     ################################################################################
 
