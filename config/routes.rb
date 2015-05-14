@@ -4,6 +4,6 @@ Rails.application.routes.draw do
 
   get '/update' => 'static_pages#update'
   get '/index' => "static_pages#index"
-  get '/FULL_UPDATE' => "static_pages#FULLUPDATE"
+  # get '/FULL_UPDATE' => "static_pages#FULLUPDATE"
 
 end
