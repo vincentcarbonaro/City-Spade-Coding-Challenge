@@ -32,17 +32,17 @@ class StaticPagesController < ApplicationController
     #     resp = Net::HTTP.get_response(URI.parse(google_api_url))
     #     data = JSON.parse(resp.body)
 
-    #     sleep(0.2)
+        sleep(0.2)
 
-    #     location = Location.new(
-    #       pid: pid,
-    #       address: address,
+        location = Location.new(
+          # pid: pid,
+          # address: address,
     #       latitude: data["results"][0]["geometry"]["location"]["lat"],
     #       longitude: data["results"][0]["geometry"]["location"]["lng"]
-    #     )
-    
+        )
+
     #     location.save!
-    #     @results << location
+        @results << location
 
       end
 
