@@ -51,8 +51,8 @@ class StaticPagesController < ApplicationController
           location = Location.new(pid: listing.attributes['data-listingid'].text, address: listing.css('.address').text.strip + " " + listing.css('.hood').text.strip)
           sleep(0.2)
           location.save!
-          @results2 << location
         end
+        @results2 << location
       end
       i+=1
     end
@@ -103,8 +103,8 @@ class StaticPagesController < ApplicationController
           location = Location.new(pid: listing.attributes['data-listingid'].text, address: listing.css('.address').text.strip + " " + listing.css('.hood').text.strip)
           sleep(0.2)
           location.save!
-          @results2 << location
         end
+        @results2 << location
       end
     end
   end
