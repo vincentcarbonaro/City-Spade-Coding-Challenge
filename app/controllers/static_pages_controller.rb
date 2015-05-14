@@ -15,8 +15,9 @@ class StaticPagesController < ApplicationController
     @results = []
     z = 0;
 
-
     doc.xpath('//Listing/Location').each do |listing|
+
+      next if z > 0
 
       if location = Location.find_by_pid(listing.at_xpath('ZPID').text)
         @results << location
