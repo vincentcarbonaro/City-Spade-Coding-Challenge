@@ -24,7 +24,7 @@ class StaticPagesController < ApplicationController
     ################################################################################
 
     url = "http://www.corcoran.com/nyc/Search/Listings?SaleType=Rent&&Count=36&Page="
-    i = 26
+    i = 25
     @results2 = []
 
     while Nokogiri::HTML(open("#{url}#{i}")).css('.info').length > 0
