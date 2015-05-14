@@ -29,7 +29,7 @@ class StaticPagesController < ApplicationController
         address = "#{listing.at_xpath('StreetAddress').text} #{listing.at_xpath('City').text} #{listing.at_xpath('State').text} #{listing.at_xpath('Zip').text}"
 
         google_api_url = "https://maps.googleapis.com/maps/api/geocode/json?address=#{address}&key=AIzaSyDzJuQL5GR4pzHRpsXlZZ9Z4_soBHGlXys"
-    #     resp = Net::HTTP.get_response(URI.parse(google_api_url))
+        resp = Net::HTTP.get_response(URI.parse(google_api_url))
     #     data = JSON.parse(resp.body)
 
         sleep(0.2)
