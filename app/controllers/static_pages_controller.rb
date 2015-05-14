@@ -19,8 +19,10 @@ class StaticPagesController < ApplicationController
 
 
       if location = Location.find_by_pid(listing.at_xpath('ZPID').text)
-        location.address = location.address + " "
-        location.save!
+        if location.latitude == nil
+          location.address = location.address + " "
+          location.save!
+        end
         @results << location
       else
 
