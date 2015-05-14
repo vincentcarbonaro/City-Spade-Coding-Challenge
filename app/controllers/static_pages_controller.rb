@@ -26,12 +26,9 @@ class StaticPagesController < ApplicationController
 
         pid = listing.at_xpath('ZPID').text
         address = "#{listing.at_xpath('StreetAddress').text} #{listing.at_xpath('City').text} #{listing.at_xpath('State').text} #{listing.at_xpath('Zip').text}"
-
         location = Location.new(pid: pid, address: address)
-
         location.save!
-
-        sleep(0.5)
+        sleep(0.2)
         @results << location
 
       end
@@ -53,6 +50,7 @@ class StaticPagesController < ApplicationController
 
       doc.css('.listing').each do |listing|
         location = Location.new(pid: listing.attributes['data-listingid'].text, address: listing.css('.address').text.strip + " " + listing.css('.hood').text.strip)
+        sleep(0.2)
         location.save!
         @results2 << location
       end
