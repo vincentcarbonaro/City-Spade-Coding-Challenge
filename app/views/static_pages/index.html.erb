@@ -1,10 +1,12 @@
+<h2><u>Vincent Carbonaro's City Spade Coding Challenge</u></h2>
+
 <head>
     <title>Simple Map</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <style>
       html, body, #map-canvas {
-        height: 500px;
+        height: 100%;
         margin: 0px;
         padding: 0px
       }
@@ -53,22 +55,3 @@
   <body>
     <div id="map-canvas"></div>
   </body>
-
-
-<!-- ############################################################### -->
-
-
-<h2><u>Vincent Carbonaro's City Spade Coding Challenge</u></h2>
-
-This current page does NOT show the most recently updated data <br>
-<br>
-DUE TO GOOGLE MAPS API LIMITS, ONLY 5 REQUESTS CAN BE MADE PER SECOND <br>
-THEREFORE ANY NEW REQUESTS WILL TAKE 0.2 SECONDS PER REQUEST. BE PATIENT.
-<br><br>
-If you would like to refresh the databse click <a href="update">here</a>
-<br><br>
-
-<% @locations.each do |location| %>
-  <%= "ID = #{location.pid}, #{location.address}, lat = #{location.latitude}, long = #{location.longitude}" %>
-  <br>
-<% end %>
